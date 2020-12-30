@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intervalprogressbar/intervalprogressbar.dart';
 import 'constants.dart';
 
 class First extends StatefulWidget {
@@ -12,7 +11,8 @@ class _FirstState extends State<First> {
   String dropdownValue = 'Technical';
   String dropdownValue1 = 'Exponential';
   String dropdownValue2 = 'Classic';
-
+  List<String> buttons_text = ['1 MIN', '5 MIN', '15 MIN', '30 MIN', '1 HR', '5 HR', '1 DAY', '1 WK', '1 MON'];
+  int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,13 +85,13 @@ class _FirstState extends State<First> {
                        children: [
                         Container(
                         height: 100,
-                    width: 10,
+                        width: 10,
                        decoration: BoxDecoration(
                        color: Colors.blue,
                       borderRadius: BorderRadius.only(topLeft:Radius.circular(20),topRight:Radius.circular(20) )
                         ),
                          ),
-                      Container(
+                        Container(
                         height: 100,
                          width: 10,
                        color: Colors.lightBlueAccent,
@@ -100,13 +100,13 @@ class _FirstState extends State<First> {
                        height: 100, width: 10,
                        color: Colors.grey,
                         ),
-                    Container(
-                    height: 100,
-                    width: 10,
-                    color: Colors.redAccent,
+                        Container(
+                       height: 100,
+                       width: 10,
+                       color: Colors.redAccent,
                       ),
-                      Container(
-                      height: 100,
+                       Container(
+                       height: 100,
                         width: 10,
                         decoration: BoxDecoration(
                           color: Colors.red,
@@ -124,75 +124,32 @@ class _FirstState extends State<First> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('1 MIN',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
-                          ),
-                          SizedBox(height: 10),
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('5 MIN',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
-                          ),
-                          SizedBox(height: 10),
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('15 MIN',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
-                          ),
-                          SizedBox(height: 10),
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('30 MIN',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
-                          ),
-                          SizedBox(height: 10),
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('1 HR',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
-                          ),
-                          SizedBox(height: 10),
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('5 HR',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
-                          ),
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('1 DAY',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
-                          ),
-                          SizedBox(height: 10),
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('1 WK',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
-                          ),
-                          SizedBox(height: 10),
-                          RaisedButton(onPressed: (){},
-                            color: Colors.white,
-                            child: Text('1 MON',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),),
+                        ListView.builder(
+                          shrinkWrap:
+                            true,
+                             itemCount: buttons_text.length,
+                            itemBuilder: (BuildContext context, int index){
+                         return  Column(
+                          children: [
+                          RaisedButton(onPressed: (){
+                            setState(() {
+                              activeIndex = index;
+                            });
+                          },
+                                color: Colors.white,
+                               child: Text(buttons_text[index],
+                                 style: TextStyle(
+                               color: activeIndex == index? Colors.black: Colors.grey
+                                  ),),
+
+                            shape: activeIndex == index ?   RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                                side: BorderSide(color: Colors.black)
+                            ): null,
+                             ),
+                           SizedBox(height: 10),]
+                            );}
+                            //zala //hao
                           ),
                         ],
                       ),
@@ -240,6 +197,7 @@ class _FirstState extends State<First> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+
                   Column(
                     children: [
                       Text('7',style:ktablevaluecolor),
@@ -479,7 +437,7 @@ class _FirstState extends State<First> {
                       DataCell(Text('465.28',style: ktablevaluecolor)),
                       DataCell(Text('BUY',style: ksell)),
                     ]),
-                    DataRow(cells: [
+                    DataRow(cells:[
                       DataCell(Text('ROC',style: ktablevaluecolor)),
                       DataCell(Text('465.28',style: ktablevaluecolor)),
                       DataCell(Text('BUY',style: ksell)),
@@ -593,38 +551,3 @@ class _FirstState extends State<First> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  Expanded(
-//                       child: Container(
-//                         child: Padding(
-//                           padding: const EdgeInsets.only(left: 250),
-//                           child: Column(
-//                             children: [
-//                              ListView.builder(
-//                              shrinkWrap: true,
-//                              itemCount: 9,
-//                              itemBuilder: (context, index){
-//                                return Card(
-//                                  elevation: 0,
-//                                  child: Text(timeframe[index]),
-//                                );
-//                              }
-//                    ),
-//                  ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
